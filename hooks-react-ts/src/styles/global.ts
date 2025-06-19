@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
    }
 
    body {
+      // Somente para macOS
+      -webkit-font-smoothing: antialiased; 
+      -moz-osx-font-smoothing: grayscale;
+      
       background: ${props => props.theme["gray-900"]};
       color: ${props => props.theme["gray-300"]};
    }
