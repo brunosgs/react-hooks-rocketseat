@@ -33,6 +33,7 @@ export function Home() {
    // Variaveis de estado para o componente
    const [cycles, setCycles] = useState<Cycle[]>([])
    const [activeCycledId, setActiveCycleId] = useState<string | null>(null)
+   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
    // Estado do form
    const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
@@ -57,7 +58,14 @@ export function Home() {
 
    const activeCycle = cycles.find((cycle) => cycle.id === activeCycledId)
 
-   console.log(activeCycle)
+   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
+   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
+
+   const minutesAmount = Math.floor(currentSeconds / 60)
+   const secondsAmount = currentSeconds % 60
+
+   const minutes = String(minutesAmount).padStart(2, '0')
+   const seconds = String(secondsAmount).padStart(2, '0')
 
    const task = watch('task')
    const isSubmitDisabled = !task
@@ -92,11 +100,11 @@ export function Home() {
             </FormContainer>
 
             <CountdownContainer>
-               <span>0</span>
-               <span>0</span>
+               <span>{minutes[0]}</span>
+               <span>{minutes[1]}</span>
                <Separator>:</Separator>
-               <span>0</span>
-               <span>0</span>
+               <span>{seconds[0]}</span>
+               <span>{seconds[1]}</span>
             </CountdownContainer>
 
             <StartCountdownButton
