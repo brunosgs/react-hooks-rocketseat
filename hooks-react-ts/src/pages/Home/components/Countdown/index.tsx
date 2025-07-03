@@ -3,11 +3,11 @@ import {
    useContext,
    useEffect
 } from "react";
+import { CyclesContext } from '../../../../contexts/CyclesContext'
 import {
    CountdownContainer,
    Separator
-} from "./styles";
-import { CyclesContext } from '../..';
+} from "./styles"
 
 export function Countdown() {
    const {
